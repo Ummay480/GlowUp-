@@ -3,12 +3,12 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const portfolioImages = [
-  { src: 'https://picsum.photos/600/800?random=1', hint: 'glam makeup' },
+  { src: 'https://picsum.photos/600/800?random=1', hint: 'glamorous makeup' },
   { src: 'https://picsum.photos/600/800?random=2', hint: 'bridal makeup' },
   { src: 'https://picsum.photos/600/800?random=3', hint: 'natural makeup' },
-  { src: 'https://picsum.photos/600/800?random=4', hint: 'evening look' },
-  { src: 'https://picsum.photos/600/800?random=5', hint: 'editorial makeup' },
-  { src: 'https://picsum.photos/600/800?random=6', hint: 'smokey eye' },
+  { src: 'https://picsum.photos/600/800?random=4', hint: 'evening makeup' },
+  { src: 'https://picsum.photos/600/800?random=5', hint: 'fashion makeup' },
+  { src: 'https://picsum.photos/600/800?random=6', hint: 'smokey eyes' },
 ];
 
 export default function PortfolioSection() {

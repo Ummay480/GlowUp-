@@ -49,9 +49,9 @@ export default function ContactSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-square max-w-md mx-auto w-full hidden md:block">
                 <Image
-                    src="https://picsum.photos/800/800?random=7"
-                    alt="Contact makeup artist"
-                    data-ai-hint="makeup tools"
+                    src="https://picsum.photos/800/800"
+                    alt="Makeup products on a vanity"
+                    data-ai-hint="makeup products"
                     fill
                     className="rounded-lg object-cover"
                 />
