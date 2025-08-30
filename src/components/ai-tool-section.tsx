@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from 'react';
-import { useRunFlow } from '@genkit-ai/next/client';
-import { suggestMakeupStyle } from '@/ai/flows/ai-makeup-style-suggestion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -10,13 +8,14 @@ import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Loader2, Wand2 } from 'lucide-react';
 import Image from 'next/image';
+import type { SuggestMakeupStyleOutput } from '@/ai/flows/ai-makeup-style-suggestion';
 
 export default function AiToolSection() {
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  
-  const {run: suggestionFlow, data, running, error: flowError} = useRunFlow(suggestMakeupStyle);
+  const [running, setRunning] = useState(false);
+  const [data, setData] = useState<SuggestMakeupStyleOutput | null>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -41,15 +40,36 @@ export default function AiToolSection() {
       return;
     }
     setError(null);
+    setRunning(true);
+    setData(null);
 
     const reader = new FileReader();
     reader.readAsDataURL(photo);
     reader.onload = async () => {
-      const photoDataUri = reader.result as string;
-      await suggestionFlow({ photoDataUri });
+      try {
+        const photoDataUri = reader.result as string;
+        const response = await fetch('/api/suggestMakeupStyle', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ photoDataUri }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'An unknown error occurred');
+        }
+
+        const result = await response.json();
+        setData(result);
+      } catch (err: any) {
+        setError(err.message || 'Failed to get suggestion.');
+      } finally {
+        setRunning(false);
+      }
     };
     reader.onerror = () => {
       setError('Failed to read the file.');
+      setRunning(false);
     };
   };
 
@@ -94,10 +114,10 @@ export default function AiToolSection() {
                 )}
               </Button>
               
-              {(error || flowError) && (
+              {error && (
                 <Alert variant="destructive" className="mt-4">
                   <AlertTitle>Error</AlertTitle>
-                  <AlertDescription>{error || flowError?.message}</AlertDescription>
+                  <AlertDescription>{error}</AlertDescription>
                 </Alert>
               )}
             </CardContent>
