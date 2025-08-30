@@ -14,7 +14,7 @@ export default function HeroSection() {
   className="relative h-[80vh] min-h-[500px] flex items-center justify-center text-center text-primary-foreground"
 >
   <Image
-    src="https://picsum.photos/1920/1080"
+    src="https://picsum.photos/1200/800"
     alt="Makeup artist applying makeup"
     data-ai-hint="makeup application"
     fill

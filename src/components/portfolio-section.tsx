@@ -4,11 +4,11 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 
 const portfolioImages = [
   { src: 'https://picsum.photos/600/800?random=1', hint: 'makeup artist' },
-  { src: 'https://picsum.photos/600/800?random=2', hint: 'makeup artist' },
-  { src: 'https://picsum.photos/600/800?random=3', hint: 'makeup artist' },
-  { src: 'https://picsum.photos/600/800?random=4', hint: 'makeup artist' },
-  { src: 'https://picsum.photos/600/800?random=5', hint: 'makeup artist' },
-  { src: 'https://picsum.photos/600/800?random=6', hint: 'makeup artist' },
+  { src: 'https://picsum.photos/600/800?random=2', hint: 'bridal makeup' },
+  { src: 'https://picsum.photos/600/800?random=3', hint: 'glam makeup' },
+  { src: 'https://picsum.photos/600/800?random=4', hint: 'natural makeup' },
+  { src: 'https://picsum.photos/600/800?random=5', hint: 'evening look' },
+  { src: 'https://picsum.photos/600/800?random=6', hint: 'editorial makeup' },
 ];
 
 export default function PortfolioSection() {
