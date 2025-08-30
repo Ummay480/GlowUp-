@@ -49,7 +49,7 @@ export default function ContactSection() {
         <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-square max-w-md mx-auto w-full hidden md:block">
                 <Image
-                    src="/contact-image.jpg"
+                    src="https://picsum.photos/800/800"
                     alt="Makeup products on a vanity"
                     data-ai-hint="makeup products"
                     fill
