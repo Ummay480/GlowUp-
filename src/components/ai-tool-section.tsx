@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useFlow } from '@genkit-ai/next/client';
+import { useRunFlow } from '@genkit-ai/next/client';
 import { suggestMakeupStyle } from '@/ai/flows/ai-makeup-style-suggestion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,7 +16,7 @@ export default function AiToolSection() {
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   
-  const [suggestionFlow, { data, running, error: flowError }] = useFlow(suggestMakeupStyle);
+  const {run: suggestionFlow, data, running, error: flowError} = useRunFlow(suggestMakeupStyle);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -67,7 +67,7 @@ export default function AiToolSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           <Card>
             <CardHeader>
-              <CardTitle className="font-headline">Get Your Suggestion</CardTitle>
+              <CardTitle>Get Your Suggestion</CardTitle>
               <CardDescription>Upload a clear, well-lit photo of your face.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -113,7 +113,7 @@ export default function AiToolSection() {
             {data && !running && (
                 <Card className="bg-accent/20 dark:bg-accent/50 h-full animate-in fade-in duration-500">
                     <CardHeader>
-                        <CardTitle className="font-headline text-primary">Your Personalized Suggestions</CardTitle>
+                        <CardTitle className="text-primary">Your Personalized Suggestions</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-6">
                         <div>
